@@ -48,3 +48,19 @@ This project is a production-style CRUD API built with Express.js. It demonstrat
 
 ## License
 ISC
+
+## Logging
+
+Adds logging middleware to your Express app using the morgan package.
+
+- It logs details of each HTTP request (method, URL, status, response time, etc.) to the console.
+- The "dev" format is a concise, color-coded output useful for development.
+- This helps you monitor and debug API requests in real time.
+
+## Data Persistence
+
+- `fs.writeFileSync` blocks execution until the file is fully written, so the response is only sent after the file is saved. This guarantees data is persisted before responding, but can slow down your server if many requests come in at once.
+- `fs.writeFile` is non-blocking and allows your server to handle other requests while the file is being written. However, you must send the response inside its callback or after its promise resolves to ensure the file is saved before responding.
+- For production, `fs.writeFile` is preferred because it keeps your server responsive.
+- For demos or scripts, `fs.writeFileSync` is simpler and guarantees the file is written before the response, but at the cost of performance.
+
